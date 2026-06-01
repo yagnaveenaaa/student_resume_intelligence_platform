@@ -154,7 +154,12 @@ form.addEventListener('submit', async (e) => {
 
   try {
     const response = await fetch('/api/analyze', { method: 'POST', body });
-    const data = await response.json();
+    let data;
+    try {
+      data = await response.json();
+    } catch {
+      throw new Error('Server returned an invalid response. Check the terminal and try again.');
+    }
 
     if (!response.ok) {
       throw new Error(data.error || 'Analysis failed');
@@ -163,7 +168,11 @@ form.addEventListener('submit', async (e) => {
     setStatus('');
     showResults(data);
   } catch (error) {
-    setStatus(error.message, 'error');
+    const message =
+      error.message === 'Failed to fetch'
+        ? 'Cannot reach the server. Run npm start in the project folder, then open http://localhost:3000 (not a file or other port).'
+        : error.message;
+    setStatus(message, 'error');
   } finally {
     updateSubmitState();
   }
