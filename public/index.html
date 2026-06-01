@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Resume Intelligence Platform</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <p class="eyebrow">Career intelligence for students</p>
+        <h1>Student Resume Intelligence Platform</h1>
+        <p class="subtitle">
+          Upload your resume, set a target role, and get ATS scoring, job match analysis,
+          skill gaps, rewrite tips, project ideas, and interview prep.
+        </p>
+      </header>
+
+      <section class="upload-card">
+        <form id="upload-form">
+          <label class="field-label" for="target-role">Target role</label>
+          <input
+            type="text"
+            id="target-role"
+            name="targetRole"
+            class="text-input"
+            placeholder="e.g. Software Engineer Intern"
+            required
+          />
+
+          <label class="field-label" for="job-description">Job description (optional)</label>
+          <textarea
+            id="job-description"
+            name="jobDescription"
+            class="text-area"
+            rows="4"
+            placeholder="Paste the job posting for better keyword and job match analysis…"
+          ></textarea>
+
+          <label class="dropzone" id="dropzone" for="resume-input">
+            <input type="file" id="resume-input" name="resume" accept="application/pdf" hidden />
+            <div class="dropzone-content">
+              <span class="dropzone-icon">PDF</span>
+              <p class="dropzone-title">Drop your resume here or click to browse</p>
+              <p class="dropzone-hint">PDF only, max 5 MB</p>
+              <p class="file-name" id="file-name"></p>
+            </div>
+          </label>
+
+          <button type="submit" class="btn-primary" id="analyze-btn" disabled>
+            Generate Intelligence Report
+          </button>
+        </form>
+      </section>
+
+      <p class="status" id="status" hidden></p>
+
+      <section class="results" id="results" hidden>
+        <div class="scores-row">
+          <div class="score-card">
+            <p class="score-label">ATS Score</p>
+            <p class="score-value" id="ats-score">—</p>
+            <div class="score-bar"><div class="score-fill score-fill-ats" id="ats-fill"></div></div>
+          </div>
+          <div class="score-card">
+            <p class="score-label">Job Match Score</p>
+            <p class="score-value score-value-match" id="job-match-score">—</p>
+            <div class="score-bar"><div class="score-fill score-fill-match" id="job-match-fill"></div></div>
+          </div>
+        </div>
+
+        <article class="report-card" id="keyword-gap">
+          <h2>Keyword Gap Analysis</h2>
+          <div class="report-grid">
+            <div>
+              <h3>Missing keywords</h3>
+              <ul id="missing-keywords"></ul>
+            </div>
+            <div>
+              <h3>Present keywords</h3>
+              <ul id="present-keywords"></ul>
+            </div>
+          </div>
+          <h3>Recommendations</h3>
+          <ul id="keyword-recommendations"></ul>
+        </article>
+
+        <article class="report-card" id="skill-gap">
+          <h2>Skill Gap Analysis</h2>
+          <div class="report-grid">
+            <div>
+              <h3>Current skills</h3>
+              <ul id="current-skills"></ul>
+            </div>
+            <div>
+              <h3>Missing skills</h3>
+              <ul id="missing-skills"></ul>
+            </div>
+          </div>
+          <h3>Priority to learn</h3>
+          <ul id="priority-skills"></ul>
+        </article>
+
+        <article class="report-card" id="rewrite-suggestions">
+          <h2>Resume Rewrite Suggestions</h2>
+          <div id="rewrite-list" class="stack"></div>
+        </article>
+
+        <article class="report-card" id="project-recommendations">
+          <h2>Project Recommendations</h2>
+          <div id="project-list" class="stack"></div>
+        </article>
+
+        <article class="report-card" id="interview-questions">
+          <h2>Interview Question Generator</h2>
+          <div id="interview-list" class="stack"></div>
+        </article>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>
